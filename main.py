@@ -6,6 +6,7 @@
 
 import random,time
 import datetime
+import random
 import threading,os
 import json
 
@@ -57,7 +58,7 @@ def createAccounts():
 	global done
 	global bad
 	#resp = requests.get("https://raw.githubusercontent.com/TahaGorme/100k-usernames/main/usernames.txt").text
-	username = "GENIX SHOP"
+	username = "undefined" + str(random.randint(10000,99999))
 	fileproxy = open("proxies.txt", "r").read().splitlines()
 	prox = random.choice(fileproxy)
 	proxy = f"http://{prox}"
@@ -230,7 +231,7 @@ def capmonster_check(key):
 			info()
 
 def getproxy():
-	resp = requests.get("https://api.proxyscrape.com/v2/?request=getproxies&protocol=http&timeout=10000&country=all&ssl=all&anonymity=all").text
+	resp = requests.get("https://api.proxyscrape.com/v2/?request=getproxies&protocol=https&timeout=10000&country=all&ssl=all&anonymity=all").text
 	with open("proxies.txt", "w+") as client:
 		client.write(resp)
 
