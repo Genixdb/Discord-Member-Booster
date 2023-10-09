@@ -65,13 +65,13 @@ def createAccounts():
 	retry_time = datetime.datetime.now()
 	hidden = retry_time.strftime("%H:%M:%S")
 	
-	param = {
+	proxies = {
 		"http": proxy,
 		"https": proxy
 	}
 	
 	try:
-		resp = requests.get("https://google.com",proxies=param,timeout=15)
+		resp = requests.get("https://google.com",proxies=proxies,timeout=15)
 		
 		print(f"   \x1b[33m[\x1b[36mINFO - {hidden}\x1b[33m] : \x1b[32mProtocol HTTP(s) - {prox}\x1b[00m")
 		sitekey = "4c672d35-0701-42b2-88c3-78380b0db560"
@@ -87,7 +87,7 @@ def createAccounts():
 		email = f"genixshop_booster{numberand}@gmail.com"
 		
 		target = "https://discord.com/api/v9/auth/register"
-		response = requests.post(target,headers=headers_reg(),json={"fingerprint":request_fingerprint(),"email":email,"username":username,"password":"As257400","invite":config['invite_code'],"consent":'true',"date_of_birth":"2000-06-05","gift_code_sku_id":'null',"captcha_key":hcaptcha,"promotional_email_opt_in":'true'},proxies=param, allow_redirects=True,timeout=10)
+		response = requests.post(target,headers=headers_reg(),json={"fingerprint":request_fingerprint(),"email":email,"username":username,"password":"As257400","invite":config['invite_code'],"consent":'true',"date_of_birth":"2000-06-05","gift_code_sku_id":'null',"captcha_key":hcaptcha,"promotional_email_opt_in":'true'},proxies=proxies, allow_redirects=True,timeout=10)
 		if (response.status_code == 400):
 			bad += 1
 			retry_time = datetime.datetime.now()
@@ -143,8 +143,7 @@ def createAccounts():
 				print(f"   \x1b[33m[\x1b[36mINFO - {hidden}\x1b[33m] : \x1b[31mCAPTCHA cannot be solved !\x1b[00m")
 				createAccounts()
 			else:
-				print(f"   \x1b[33m[\x1b[36mINFO - {hidden}\x1b[33m] : \x1b[31mError Don't know server: \x1b[31m")
-				print(response.json(),response)
+				print(f"   \x1b[33m[\x1b[36mINFO - {hidden}\x1b[33m] : \x1b[31mUsername is not available !\x1b[31m")
 				createAccounts()
 		elif (response.status_code == 201 or response.status_code == 200 or response.status_code == 204):
 			retry_time = datetime.datetime.now()
@@ -175,7 +174,7 @@ ban_check = """\x1b[32m
        ╔══╦═╦═╦╦══╦╗╔╗╔══╦╗╔╦═╦═╗
        ║╔═╣╦╣║║╠║║╩╗╔╝║══╣╚╝║║║╬║
        ║╚╗║╩╣║║╠║║╦╝╚╗╠══║╔╗║║║╔╝
-       ╚══╩═╩╩═╩══╩╝╚╝╚══╩╝╚╩═╩╝ 1.2.0\x1b[00m
+       ╚══╩═╩╩═╩══╩╝╚╝╚══╩╝╚╩═╩╝ 2.1.0\x1b[00m
 """
 
 def createBooster():
@@ -249,4 +248,3 @@ try:
 		capmonster_check(config['captcha_key'])
 except FileNotFoundError:
 	print(f"""   \x1b[33m[\x1b[36mINFO - {hidden}\x1b[33m] : \x1b[31mFileNotFoundError 'config.json'\x1b[00m """)
-
